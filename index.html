@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SustainabCampus - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            color: #00796b;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #004d40;
+            color: white;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .user-posts, .problems, .committee {
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #b2dfdb;
+        }
+        .user-posts img, .problems img, .committee img {
+            width: 100px;
+            height: auto;
+            margin: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to SustainabCampus</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="waste.html">Waste Management</a>
+            <a href="water.html">Water Conservation</a>
+            <a href="challenges.html">Challenges</a>
+            <a href="contact.html">Contact</a>
+            <a href="suggestions.html">Suggestions</a>
+            <a href="inquiry.html">Inquiry</a>
+            <a href="about.html">about</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>User Posts</h2>
+        <p>Share your photos or videos showcasing your sustainability efforts!</p>
+        <div class="user-posts">
+            <h3>Recent Posts</h3>
+            <img src="https://i.imgur.com/yourimage1.jpg" alt="User Post 1">
+            <img src="https://i.imgur.com/yourimage2.jpg" alt="User Post 2">
+            <img src="https://i.imgur.com/yourimage3.jpg" alt="User Post 3">
+            <!-- Add more images as needed -->
+        </div>
+
+        <h2>Report Your Problems</h2>
+        <p>Facing challenges in your sustainability efforts? Share your problems here:</p>
+        <div class="problems">
+            <h3>Community Issues</h3>
+            <p>- Difficulty accessing recycling facilities</p>
+            <p>- Need for more awareness about water conservation</p>
+            <p>- Lack of community involvement in clean-up events</p>
+        </div>
+
+        <h2>Join Our Committee</h2>
+        <p>Want to take a more active role? Form a committee and work with us on sustainability initiatives!</p>
+        <div class="committee">
+            <h3>Committee Formation</h3>
+            <p>Sign up to join our sustainability committee:</p>
+            <form>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <input type="submit" value="Join Committee">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>Contact us: sustainabcampus@example.com</p>
+    </footer>
+</body>
+</html>
