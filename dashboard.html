@@ -3,149 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>Dashboard - Mini Instagram</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-    <div class="dashboard">
-       
-        <div class="tabs">
-            <button class="tab-link active" onclick="openTab('add-post-section')">Add Post</button>
-            <button class="tab-link" onclick="openTab('your-posts-section')">Your Posts</button>
-            <button class="tab-link" onclick="openTab('comments-section')">Your Comments</button>
-        </div>
-
-        
-        <div id="add-post-section" class="tab-content active">
-            <h2>Add a Post</h2>
-            <form id="post-form">
-                <textarea name="postContent" id="postContent" rows="5" placeholder="Write your post..."></textarea>
-                <button type="button" onclick="addPost()">Add Post</button>
-            </form>
-        </div>
-
-       
-        <div id="your-posts-section" class="tab-content">
-            <h2>Your Posts</h2>
-            <div id="posts-container">
-                
-            </div>
-        </div>
-
-        
-        <div id="comments-section" class="tab-content">
-            <h2>Your Comments</h2>
-            <div id="user-comments-container">
-               
-            </div>
-        </div>
-    </div>
-
-    <script>
-        
-        let posts = [];
-
-        
-        function addPost() {
-            const postContent = document.getElementById('postContent').value;
-
-            if (postContent === "") {
-                alert("Post content cannot be empty!");
-                return;
-            }
-
-            const post = {
-                content: postContent,
-                likes: 0,
-                comments: []
-            };
-
-            posts.push(post);
-            document.getElementById('postContent').value = '';  
-            displayPosts();
-        }
-
-       
-        function displayPosts() {
-            const postsContainer = document.getElementById('posts-container');
-            postsContainer.innerHTML = '';
-
-            posts.forEach((post, index) => {
-                const postElement = document.createElement('div');
-                postElement.classList.add('post');
-
-                postElement.innerHTML = `
-                    <p>${post.content}</p>
-                    <div class="post-actions">
-                        <button onclick="likePost(${index})">Like (${post.likes})</button>
-                        <button onclick="commentOnPost(${index})">Comment</button>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="C:\Users\bajaj\OneDrive\Desktop\Pictures\profile2.jpg" alt="User Avatar" class="avatar">
+                <h2>Username</h2>
+                <div class="dropdown">
+                    <button class="dropbtn">Profile</button>
+                    <div class="dropdown-content">
+                        <a href="#">Profile Info</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Progress</a>
+                        <a href="#">Logout</a>
                     </div>
-                    <div id="comments-section-${index}" class="comments-section"></div>
-                `;
+                </div>
+            </div>
+        </div>
 
-                postsContainer.appendChild(postElement);
-                displayComments(index);
-            });
+        <div class="dashboard">
+            <div class="tabs">
+                <button class="tab-link active" onclick="openTab('add-post-section', this)">Add Post</button>
+                <button class="tab-link" onclick="openTab('your-posts-section', this)">Your Posts</button>
+                <button class="tab-link" onclick="openTab('comments-section', this)">Your Comments</button>
+            </div>
 
-            displayUserComments();
-        }
+            <!-- Add Post Section -->
+            <div id="add-post-section" class="tab-content active">
+                <h2>Add a Post</h2>
+                <form id="post-form">
+                    <textarea name="postContent" id="postContent" rows="5" placeholder="Write your post..."></textarea>
+                    <input type="file" id="postImage" accept="image/*">
+                    <button type="button" onclick="addPost()">Add Post</button>
+                </form>
+            </div>
 
-       
-        function likePost(index) {
-            posts[index].likes++;
-            displayPosts();
-        }
+            <!-- Your Posts Section -->
+            <div id="your-posts-section" class="tab-content">
+                <h2>Your Posts</h2>
+                <div id="posts-container"></div>
+            </div>
 
-        
-        function commentOnPost(index) {
-            const comment = prompt("Enter your comment:");
+            <!-- Your Comments Section -->
+            <div id="comments-section" class="tab-content">
+                <h2>Your Comments</h2>
+                <div id="user-comments-container"></div>
+            </div>
+        </div>
 
-            if (comment) {
-                posts[index].comments.push(comment);
+        <script>
+            let posts = [];
+
+            function addPost() {
+                const postContent = document.getElementById('postContent').value;
+                const postImage = document.getElementById('postImage').files[0];
+
+                if (postContent === "" && !postImage) {
+                    alert("Post content or image is required!");
+                    return;
+                }
+
+                let postImageURL = '';
+                if (postImage) {
+                    postImageURL = URL.createObjectURL(postImage);
+                }
+
+                const post = {
+                    content: postContent,
+                    image: postImageURL,
+                    likes: 0,
+                    comments: []
+                };
+
+                posts.push(post);
+                document.getElementById('postContent').value = '';
+                document.getElementById('postImage').value = '';
                 displayPosts();
             }
-        }
 
-       
-        function displayComments(index) {
-            const commentsSection = document.getElementById(`comments-section-${index}`);
-            commentsSection.innerHTML = '';
+            function displayPosts() {
+                const postsContainer = document.getElementById('posts-container');
+                postsContainer.innerHTML = '';
 
-            posts[index].comments.forEach(comment => {
-                const commentElement = document.createElement('p');
-                commentElement.textContent = comment;
-                commentsSection.appendChild(commentElement);
-            });
-        }
+                posts.forEach((post, index) => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('post');
 
-        
-        function displayUserComments() {
-            const userCommentsContainer = document.getElementById('user-comments-container');
-            userCommentsContainer.innerHTML = '';
-
-            posts.forEach(post => {
-                post.comments.forEach(comment => {
-                    const commentElement = document.createElement('div');
-                    commentElement.classList.add('post');
-                    commentElement.innerHTML = `
-                        <p>${comment}</p>
+                    postElement.innerHTML = `
+                        <p>${post.content}</p>
+                        ${post.image ? `<img src="${post.image}" alt="Post Image">` : ''}
+                        <div class="post-actions">
+                            <button onclick="likePost(${index})">Like (${post.likes})</button>
+                            <button onclick="commentOnPost(${index})">Comment</button>
+                        </div>
+                        <div id="comments-section-${index}" class="comments-section"></div>
                     `;
-                    userCommentsContainer.appendChild(commentElement);
+
+                    postsContainer.appendChild(postElement);
+                    displayComments(index);
                 });
-            });
-        }
 
-        
-        function openTab(tabId) {
-            const tabs = document.querySelectorAll('.tab-content');
-            const buttons = document.querySelectorAll('.tab-link');
+                displayUserComments();
+            }
 
-            tabs.forEach(tab => tab.classList.remove('active'));
-            buttons.forEach(button => button.classList.remove('active'));
+            function likePost(index) {
+                posts[index].likes++;
+                displayPosts();
+            }
 
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`button[onclick="openTab('${tabId}')"]`).classList.add('active');
-        }
-    </script>
+            function commentOnPost(index) {
+                const comment = prompt("Enter your comment:");
+
+                if (comment) {
+                    posts[index].comments.push(comment);
+                    displayPosts();
+                }
+            }
+
+            function displayComments(index) {
+                const commentsSection = document.getElementById(`comments-section-${index}`);
+                commentsSection.innerHTML = '';
+
+                posts[index].comments.forEach(comment => {
+                    const commentElement = document.createElement('p');
+                    commentElement.textContent = comment;
+                    commentsSection.appendChild(commentElement);
+                });
+            }
+
+            function displayUserComments() {
+                const userCommentsContainer = document.getElementById('user-comments-container');
+                userCommentsContainer.innerHTML = '';
+
+                posts.forEach(post => {
+                    post.comments.forEach(comment => {
+                        const commentElement = document.createElement('div');
+                        commentElement.classList.add('post');
+                        commentElement.innerHTML = `<p>${comment}</p>`;
+                        userCommentsContainer.appendChild(commentElement);
+                    });
+                });
+            }
+
+            function openTab(tabId, element) {
+                const tabs = document.querySelectorAll('.tab-content');
+                const buttons = document.querySelectorAll('.tab-link');
+
+                tabs.forEach(tab => tab.classList.remove('active'));
+                buttons.forEach(button => button.classList.remove('active'));
+
+                document.getElementById(tabId).classList.add('active');
+                element.classList.add('active');
+            }
+        </script>
+    </div>
+</body>
 </html>
