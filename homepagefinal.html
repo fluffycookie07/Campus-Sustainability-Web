@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Sustainability Hero</title>
+  <link rel="stylesheet" href="./index.css">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 5s ease-in;
+    }
+
+    .animate-scroll {
+      animation: scroll 25s linear infinite;
+    }
+
+    .font-montserrat {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .font-lato {
+      font-family: 'Lato', sans-serif;
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      /* Could be more or less, depending on screen size */
+      border-radius: 8px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .flip-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 80px;
+      gap: 20px;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 310px;
+      height: 310px;
+      perspective: 1000px;
+      border-radius:30px;
+      /* Perspective for the flip effect */
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
+    }
+
+    .flip-card-front {
+      background-color: #28f1b553;
+      color: white;
+      border-radius: 30px;
+    }
+
+    .flip-card-back {
+      background-color: #f1ebeb;
+      color: rgb(12, 12, 12);
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <nav class="fixed top-0 left-0 w-full bg-gradient-to-r z-50 from-black-400 to-pink-500 bg-opacity-90 shadow-md"-->
+    <nav class="fixed top-0 left-0 w-full bg-white bg-opacity-40 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex-shrink-0">
+          <a href="#" class="flex items-center">
+              <img src="https://i.ibb.co/YQ6mYwQ/CSW-logo.jpg" class="w-14 h-14 rounded-full"
+                  alt="Uber Logo">
+          </a>
+      </div>
+
+      <!-- Mobile view Sidebar -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="#"
+              class="text-black hover:text-grey-200 px-3 py-2  rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">Home</a>
+            <a href="#"
+              class="text-black hover:text-grey-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">About
+              Us</a>
+              <a href="#"
+              class="text-black hover:text-grey-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">Resources
+              </a>
+            <!-- Resources Dropdown -->
+            <!-- <div class="relative inline-block text-left">
+              <button id="dropdownDelayButton" data-dropdown-toggle="dropdownResources" data-dropdown-delay="500"
+                data-dropdown-trigger="hover"
+                class="text-black hover:text-green-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">
+                Resources
+                <svg class="w-2.5 h-2.5 ms-1 inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+                </svg>
+              </button>
+              <div id="dropdownResources"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
+                  <li>
+                    <a href="#"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
+                      out</a>
+                  </li>
+                </ul>
+              </div>
+            </div> -->
+            <!-- Contact Dropdown -->
+            <div class="relative inline-block text-left">
+              <button id="dropdownContactButton" data-dropdown-toggle="dropdownContact" data-dropdown-delay="500"
+                data-dropdown-trigger="hover"
+                class="text-black hover:text-grey-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">
+                Contact us
+                <!-- <svg class="w-2.5 h-2.5 ms-1 inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+                </svg> -->
+              </button>
+              <div id="dropdownContact"
+                class="z-10 hidden bg-white divide-y divide-black-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-black-200" aria-labelledby="dropdownContactButton">
+                  <li>
+                    <a href="#"
+                      class="block px-4 py-2 hover:bg-black-100 dark:hover:bg-black-600 dark:hover:text-black">enquiry form
+                      </a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-black"> feedback form  </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-4 flex items-center md:ml-6">
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out mr-2">Login</button>
+            <button
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="-mr-2 flex md:hidden">
+    <button id="menu-toggle" type="button"
+      class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-green-200 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-800 focus:ring-white">
+      <span class="sr-only">Open main menu</span>
+      <svg class="block h-6 w-6" id="menu-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg class="hidden h-6 w-6" id="menu-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  <!-- </div> -->
+  <!-- </div> -->
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="#" class="text-black hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">About
+        Us</a>
+      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Initiatives</a>
+      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Resources</a>
+      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Get
+        Involved</a>
+      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+    </div>
+
+    <div class="pt-4 pb-3 border-t border-green-700">
+      <div class="flex items-center px-5">
+        <button
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out mr-2 w-full">Login</button>
+        <button
+          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out w-full">Register</button>
+      </div>
+    </div>
+  </div>
+  </nav>
+  <!-- HERO SECTION -->
+  <div class="relative min-h-screen bg-cover bg-center mb-5 pb-10"
+    style="background-image: url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80');">
+    <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-500 opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-4 py-16">
+      <div class="flex justify-between items-center mb-16">
+      </div>
+      <div class="text-center mb-16 animate-fade-in">
+        <h1 class="text-5xl font-bold text-white mb-4 font-montserrat tracking-wide">Join the Movement Toward a
+          Sustainable Campus</h1>
+        <p class="text-2xl text-gray-200 font-lato">Track your water usage, report waste, and make an impact
+          today.</p>
+      </div>
+    </div>
+    <div class="relative overflow-hidden">
+      <div class="flex animate-scroll">
+        <div class="flex-none w-1/3 px-2">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+              alt="Eco-Challenge" class="w-full h-64 object-cover rounded-lg">
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+              <p class="text-sm">Eco-Challenge 2024: Reducing Single-Use Plastics</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-none w-1/3 px-2">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+              alt="Tree Planting" class="w-full h-64 object-cover rounded-lg">
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+              <p class="text-sm">Student-Led Tree Planting Drive</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-none w-1/3 px-2">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+              alt="Water Conservation" class="w-full h-64 object-cover rounded-lg">
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+              <p class="text-sm">Campus-Wide Water Conservation Initiative</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-none w-1/3 px-2">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+              alt="Water Conservation" class="w-full h-64 object-cover rounded-lg">
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+              <p class="text-sm">Campus-Wide Water Conservation Initiative</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-none w-1/3 px-2">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+              alt="Water Conservation" class="w-full h-64 object-cover rounded-lg">
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+              <p class="text-sm">Campus-Wide Water Conservation Initiative</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-container">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <h3>Why</h3>
+          </div>
+          <div class="flip-card-back">
+            <p>This section explains why sustainability is important...</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <h3>How</h3>
+          </div>
+          <div class="flip-card-back">
+            <p>This section describes how we can achieve sustainability goals...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <h3>Where</h3>
+          </div>
+          <div class="flip-card-back">
+            <p>This section points to key locations where we can implement solutions...</p>
+          </div>
+        </div>
+      </div>
+      <!-- New flip card added here -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <h3>What</h3>
+          </div>
+          <div class="flip-card-back">
+            <p>This section explains what actions we should take for sustainability...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownButtons = document.querySelectorAll('[data-dropdown-toggle]');
+
+      dropdownButtons.forEach(button => {
+        button.addEventListener('mouseenter', function () {
+          const dropdownId = this.getAttribute('data-dropdown-toggle');
+          document.getElementById(dropdownId).classList.remove('hidden');
+        });
+
+        button.addEventListener('mouseleave', function () {
+          const dropdownId = this.getAttribute('data-dropdown-toggle');
+          document.getElementById(dropdownId).classList.add('hidden');
+        });
+
+        const dropdownMenu = document.getElementById(button.getAttribute('data-dropdown-toggle'));
+        dropdownMenu.addEventListener('mouseenter', function () {
+          this.classList.remove('hidden');
+        });
+
+        dropdownMenu.addEventListener('mouseleave', function () {
+          this.classList.add('hidden');
+        });
+      });
+    });
+
+
+  </script>
+  <style>
+    /* Add this CSS to your existing styles */
+    #dropdownResources,
+    #dropdownContact {
+      position: absolute;
+      /* Position relative to the nearest positioned ancestor */
+      top: 100%;
+      /* Position below the button */
+      left: 0;
+      /* Align with the left edge of the button */
+      z-index: 50;
+      /* Ensure it's above other elements */
+      background-color: white;
+      /* Dropdown background */
+      border-radius: 0.5rem;
+      /* Rounded corners */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      /* Shadow for depth */
+      padding: 0.5rem 0;
+      /* Padding for better spacing */
+    }
+
+    #dropdownResources a,
+    #dropdownContact a {
+      white-space: nowrap;
+      /* Prevent text wrapping */
+      padding: 0.5rem 1rem;
+      /* Padding for dropdown items */
+      display: block;
+      /* Ensure full width for items */
+    }
+
+    #dropdownResources a:hover,
+    #dropdownContact a:hover {
+      background-color: #f1f1f1;
+      /* Change background on hover */
+    }
+  </style>
+  <footer class="bg-white dark:bg-white">
+    <div class="mx-auto w-full max-w-screen-xl">
+      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
+        <div>
+          <!-- <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Company</h2>
+          <ul class="text-gray-500 font-medium">
+            <li class="mb-4">
+              <a href="#" class="hover:underline">About</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Careers</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Brand Center</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Blog</a>
+            </li>
+          </ul>
+        </div>
+        <div> -->
+          <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Help center</h2>
+          <ul class="text-gray-500 font-medium">
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Discord Server</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Twitter</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Facebook</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
+          <ul class="text-gray-500 font-medium">
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Privacy Policy</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Licensing</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Download</h2>
+          <ul class="text-gray-500 font-medium">
+            <li class="mb-4">
+              <a href="#" class="hover:underline">iOS</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Android</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Windows</a>
+            </li>
+            <li class="mb-4">
+              <a href="#" class="hover:underline">MacOS</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
