@@ -1,133 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Campus Sustainability Hero</title>
   <link rel="stylesheet" href="./index.css">
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 5s ease-in;
-    }
-
-    .animate-scroll {
-      animation: scroll 25s linear infinite;
-    }
-
-    .font-montserrat {
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .font-lato {
-      font-family: 'Lato', sans-serif;
-    }
-
-    .modal-content {
-      background-color: white;
-      margin: 15% auto;
-      /* 15% from the top and centered */
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      /* Could be more or less, depending on screen size */
-      border-radius: 8px;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .flip-container {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 80px;
-      gap: 20px;
-    }
-
-    .flip-card {
-      background-color: transparent;
-      width: 310px;
-      height: 310px;
-      perspective: 1000px;
-      border-radius:30px;
-      /* Perspective for the flip effect */
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 30px;
-    }
-
-    .flip-card-front {
-      background-color: #28f1b553;
-      color: white;
-      border-radius: 30px;
-    }
-
-    .flip-card-back {
-      background-color: #f1ebeb;
-      color: rgb(12, 12, 12);
-      transform: rotateY(180deg);
-    }
-  </style>
 </head>
 
 <body>
@@ -137,68 +17,32 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex-shrink-0">
           <a href="#" class="flex items-center">
-              <img src="https://i.ibb.co/YQ6mYwQ/CSW-logo.jpg" class="w-14 h-14 rounded-full"
-                  alt="Uber Logo">
+              <img id="myImg" src="https://i.ibb.co/YQ6mYwQ/CSW-logo.jpg" class="w-14 h-14 rounded-full"
+                  alt="campus sustainability Logo">
           </a>
       </div>
-
+      <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+      </div>
       <!-- Mobile view Sidebar -->
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
-            <a href="#"
+            <a href="sample.html"
               class="text-black hover:text-grey-200 px-3 py-2  rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">Home</a>
             <a href="#"
               class="text-black hover:text-grey-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">About
               Us</a>
-              <a href="#"
+              <a href="resources.html"
               class="text-black hover:text-grey-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">Resources
               </a>
-            <!-- Resources Dropdown -->
-            <!-- <div class="relative inline-block text-left">
-              <button id="dropdownDelayButton" data-dropdown-toggle="dropdownResources" data-dropdown-delay="500"
-                data-dropdown-trigger="hover"
-                class="text-black hover:text-green-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">
-                Resources
-                <svg class="w-2.5 h-2.5 ms-1 inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m1 1 4 4 4-4" />
-                </svg>
-              </button>
-              <div id="dropdownResources"
-                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
-                  <li>
-                    <a href="#"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
-                      out</a>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
             <!-- Contact Dropdown -->
             <div class="relative inline-block text-left">
               <button id="dropdownContactButton" data-dropdown-toggle="dropdownContact" data-dropdown-delay="500"
                 data-dropdown-trigger="hover"
                 class="text-black hover:text-grey-200 px-3 py-2 rounded-md text-lg font-medium transition duration-300 ease-in-out hover:underline">
                 Contact us
-                <!-- <svg class="w-2.5 h-2.5 ms-1 inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m1 1 4 4 4-4" />
-                </svg> -->
               </button>
               <div id="dropdownContact"
                 class="z-10 hidden bg-white divide-y divide-black-100 rounded-lg shadow w-44 dark:bg-gray-700">
@@ -250,10 +94,9 @@
       <a href="#" class="text-black hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
       <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">About
         Us</a>
-      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Initiatives</a>
+      
       <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Resources</a>
-      <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Get
-        Involved</a>
+      
       <a href="#" class="text-white hover:bg-green-700 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
     </div>
 
@@ -268,8 +111,9 @@
   </div>
   </nav>
   <!-- HERO SECTION -->
-  <div class="relative min-h-screen bg-cover bg-center mb-5 pb-10"
-    style="background-image: url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80');">
+  <!-- <div class="relative min-h-screen bg-cover bg-center mb-5 pb-10"
+    style="background-image: url('https://img.freepik.com/free-vector/green-environmental-background-watercolor-border-with-sustainability-concept-vector_53876-156363.jpg?w=1060&t=st=1728970186~exp=1728970786~hmac=e6102fc83b0ba2aba206533e531615d2f3bbf857cec41b1169a15c8038a88d67');"> -->
+    <div class="relative min-h-screen bg-cover bg-center mb-5 pb-10" style="background-color:#55e0d771">
     <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-500 opacity-50"></div>
     <div class="relative z-10 container mx-auto px-4 py-16">
       <div class="flex justify-between items-center mb-16">
@@ -407,46 +251,37 @@
       });
     });
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Close modal when clicked outside of the image
+modal.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+}
 
   </script>
-  <style>
-    /* Add this CSS to your existing styles */
-    #dropdownResources,
-    #dropdownContact {
-      position: absolute;
-      /* Position relative to the nearest positioned ancestor */
-      top: 100%;
-      /* Position below the button */
-      left: 0;
-      /* Align with the left edge of the button */
-      z-index: 50;
-      /* Ensure it's above other elements */
-      background-color: white;
-      /* Dropdown background */
-      border-radius: 0.5rem;
-      /* Rounded corners */
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      /* Shadow for depth */
-      padding: 0.5rem 0;
-      /* Padding for better spacing */
-    }
-
-    #dropdownResources a,
-    #dropdownContact a {
-      white-space: nowrap;
-      /* Prevent text wrapping */
-      padding: 0.5rem 1rem;
-      /* Padding for dropdown items */
-      display: block;
-      /* Ensure full width for items */
-    }
-
-    #dropdownResources a:hover,
-    #dropdownContact a:hover {
-      background-color: #f1f1f1;
-      /* Change background on hover */
-    }
-  </style>
+  
   <footer class="bg-white dark:bg-white">
     <div class="mx-auto w-full max-w-screen-xl">
       <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
